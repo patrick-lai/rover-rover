@@ -1,0 +1,26 @@
+{
+  "name": "rover-rover",
+  "version": "1.0.0",
+  "description": "Mars landing",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "test:watch": "jest --watch"
+  },
+  "files": ["dist"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patrick-lai/rover-rover.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/patrick-lai/rover-rover/issues"
+  },
+  "homepage": "https://github.com/patrick-lai/rover-rover#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "jest": "^22.4.2"
+  }
+}
