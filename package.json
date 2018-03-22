@@ -11,7 +11,9 @@
     "release": "echo NOT IMPLEMENTED YET - build a compiled dist",
     "sample": "npm run start ./tests/sampleData/sampleInput.txt"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/patrick-lai/rover-rover.git"

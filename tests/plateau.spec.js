@@ -158,4 +158,17 @@ describe('Rover behaviour', () => {
     expect(r1.disabled).toBe(true);
     expect(() => plateau.executeNextInstructionOfRover(r1)).toThrow();
   });
+
+  test('Can check if completed mission', () => {
+    const plateau = new Plateau({ dimensions: '5 5', maxStackingRovers: 2 });
+    const r1 = new Rover({ landingSpot: '1 1 N', instructions: 'M' });
+    const r2 = new Rover({ landingSpot: '1 2 E', instructions: 'LLLL' });
+
+    plateau.deployRover(r1);
+    plateau.deployRover(r2);
+
+    expect(plateau.hasCompletedMission()).toBe(false);
+    while (!r2.isCompleted()) plateau.executeNextInstructionOfRover(r2);
+    expect(plateau.hasCompletedMission()).toBe(true);
+  });
 });

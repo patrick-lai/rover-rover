@@ -84,3 +84,5 @@ total: 5 hours
 ### TODO
 
 make `npm run release` build a compiled dist.
+
+**NOTE** - The specs does not check if the mission is complete but theres a method in `Plateau` `hasCompletedMission` which can check.

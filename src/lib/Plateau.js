@@ -4,6 +4,7 @@
  */
 
 import Rover from './Rover';
+import { DIRECTIONS } from './instructions';
 
 const validateMaxStackingRovers = input => input > 0;
 
@@ -173,5 +174,13 @@ export default class Plateau {
       default:
       //Do nothing on the plateau
     }
+  };
+
+  // Checks to see if we have seen all directions
+  hasCompletedMission = () => {
+    let seen = [];
+    this.rovers.forEach(r => (seen = seen.concat(r.seen)));
+    for (const d of DIRECTIONS) if (!seen.includes(d)) return false;
+    return true;
   };
 }
