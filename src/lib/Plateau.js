@@ -1,10 +1,6 @@
 /***
- * Generate an n*n iterable plateau
+ * Generate an n*m iterable plateau
  * Handles rover movement
- */
-
-/*
- * Helpers
  */
 
 import Rover from './Rover';
