@@ -6,8 +6,9 @@ import Rover from '../src/Rover';
 
 describe('Rover behaviour', () => {
   test('Can instantiate a rover', () => {
-    const r1 = new Rover({ landingSpot: '1 2 N', instructions: 'LMLMLMLMM' });
-    const r2 = new Rover({ landingSpot: '1 2 N' });
+    new Rover({ landingSpot: '1 2 N', instructions: 'LMLMLMLMM' });
+    new Rover({ landingSpot: '1 2 S' });
+    new Rover({ landingSpot: '0 0 W' });
   });
 
   test('Cannot instantiate on bad landingSpot', () => {

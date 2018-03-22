@@ -12,15 +12,23 @@ describe('Rover behaviour', () => {
   });
 
   test('Can not instantiate a bad plateau', () => {
-    expect(() => new Plateau({ dimensions: '1 1', maxStackingRovers: 0 })).toThrow();
-    expect(() => new Plateau({ dimensions: 'apple', maxStackingRovers: 999 })).toThrow();
-    expect(() => new Plateau({ dimensions: null, maxStackingRovers: 1 })).toThrow();
-    expect(() => new Plateau({ dimensions: '1 1', maxStackingRovers: null })).toThrow();
+    expect(
+      () => new Plateau({ dimensions: '1 1', maxStackingRovers: 0 })
+    ).toThrow();
+    expect(
+      () => new Plateau({ dimensions: 'apple', maxStackingRovers: 999 })
+    ).toThrow();
+    expect(
+      () => new Plateau({ dimensions: null, maxStackingRovers: 1 })
+    ).toThrow();
+    expect(
+      () => new Plateau({ dimensions: '1 1', maxStackingRovers: null })
+    ).toThrow();
     expect(() => new Plateau()).toThrow();
   });
 
   test('Can deploy some rovers', () => {
-    const plateau = new Plateau({ dimensions: '5 5', maxStackingRovers: 2 });
+    const plateau = new Plateau({ dimensions: '5 5', maxStackingRovers: 3 });
     const r1 = new Rover({ landingSpot: '1 1 N' });
     const r2 = new Rover({ landingSpot: '1 2 E' });
 
@@ -40,7 +48,7 @@ describe('Rover behaviour', () => {
     expect(r3.facing).toBe('W');
   });
 
-  xtest('Cannot deploy more rovers than max', () => {
+  test('Cannot deploy more rovers than max', () => {
     const plateau = new Plateau({ dimensions: '5 5', maxStackingRovers: 2 });
     const r1 = new Rover({ landingSpot: '1 1 N' });
     const r2 = new Rover({ landingSpot: '1 1 E' });
@@ -51,7 +59,77 @@ describe('Rover behaviour', () => {
     plateau.deployRover(r2);
     expect(plateau.rovers.length).toBe(2);
     // 3rd one shouldn't fit
-    expect(plateau.deployRover(r3)).toThrow();
+    expect(() => plateau.deployRover(r3)).toThrow();
     expect(plateau.rovers.length).toBe(2);
+  });
+
+  test('Can correctly retrieve a rovers state', () => {
+    const plateau = new Plateau({ dimensions: '6 3', maxStackingRovers: 5 });
+    const r1 = new Rover({ landingSpot: '1 2 N' });
+    const r2 = new Rover({ landingSpot: '5 0 E' });
+    const r3 = new Rover({ landingSpot: '3 3 W' });
+
+    plateau.deployRover(r1);
+    expect(plateau.getRoverState(r1)).toEqual([1, 2, 'N']);
+    plateau.deployRover(r2);
+    expect(plateau.getRoverState(r2)).toEqual([5, 0, 'E']);
+    // 3rd one shouldn't fit
+    plateau.deployRover(r3);
+    expect(plateau.getRoverState(r3)).toEqual([3, 3, 'W']);
+  });
+
+  test('Can migrate a rover', () => {
+    const plateau = new Plateau({ dimensions: '5 5', maxStackingRovers: 5 });
+    const r1 = new Rover({ landingSpot: '1 2 N', instructions: 'MM' });
+
+    plateau.deployRover(r1);
+    expect(plateau.getRoverState(r1)).toEqual([1, 2, 'N']);
+    plateau._migrateRover(r1, { x: 2, y: 2 });
+    expect(plateau.getRoverState(r1)).toEqual([2, 2, 'N']);
+    plateau._migrateRover(r1, { x: 5, y: 3 });
+    expect(plateau.getRoverState(r1)).toEqual([5, 3, 'N']);
+    plateau._migrateRover(r1, { x: 0, y: 0 });
+    expect(plateau.getRoverState(r1)).toEqual([0, 0, 'N']);
+  });
+
+  test('Can not migrate a rover out of bounds', () => {
+    const plateau = new Plateau({ dimensions: '5 5', maxStackingRovers: 5 });
+    const r1 = new Rover({ landingSpot: '1 2 N' });
+
+    plateau.deployRover(r1);
+    expect(() => plateau._migrateRover(r1, { x: 10, y: 2 })).toThrow();
+    expect(() => plateau._migrateRover(r1, { x: 5, y: 12 })).toThrow();
+  });
+
+  test('Can execute a rovers instructions', () => {
+    const plateau = new Plateau({ dimensions: '5 5', maxStackingRovers: 5 });
+    const r1 = new Rover({
+      landingSpot: '1 2 N',
+      instructions: 'LLRRMMLMLMLM'
+    });
+
+    plateau.deployRover(r1);
+    plateau.executeNextInstructionOfRover(r1);
+    expect(plateau.getRoverState(r1)).toEqual([1, 2, 'W']);
+    plateau.executeNextInstructionOfRover(r1);
+    expect(plateau.getRoverState(r1)).toEqual([1, 2, 'S']);
+    plateau.executeNextInstructionOfRover(r1);
+    expect(plateau.getRoverState(r1)).toEqual([1, 2, 'W']);
+    plateau.executeNextInstructionOfRover(r1);
+    expect(plateau.getRoverState(r1)).toEqual([1, 2, 'N']);
+    plateau.executeNextInstructionOfRover(r1);
+    expect(plateau.getRoverState(r1)).toEqual([1, 3, 'N']);
+    plateau.executeNextInstructionOfRover(r1);
+    expect(plateau.getRoverState(r1)).toEqual([1, 4, 'N']);
+    plateau.executeNextInstructionOfRover(r1);
+    expect(plateau.getRoverState(r1)).toEqual([1, 4, 'W']);
+    plateau.executeNextInstructionOfRover(r1);
+    expect(plateau.getRoverState(r1)).toEqual([0, 4, 'W']);
+    plateau.executeNextInstructionOfRover(r1);
+    expect(plateau.getRoverState(r1)).toEqual([0, 4, 'S']);
+    plateau.executeNextInstructionOfRover(r1);
+    expect(plateau.getRoverState(r1)).toEqual([0, 3, 'S']);
+    plateau.executeNextInstructionOfRover(r1);
+    expect(plateau.getRoverState(r1)).toEqual([0, 3, 'E']);
   });
 });

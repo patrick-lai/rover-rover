@@ -66,5 +66,6 @@ Lets try to make it stateful so if we ever get to the front end we can maybe lev
 
 * 1st Session ~ 1.5 hours
 * 2nd Session ~ 1 hour
+* 3rd Session ~ 2 hours
 
 total: 2.5 hours

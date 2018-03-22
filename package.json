@@ -7,7 +7,9 @@
     "test": "jest --coverage",
     "watch:test": "jest --watch"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/patrick-lai/rover-rover.git"
