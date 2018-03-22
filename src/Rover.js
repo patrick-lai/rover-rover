@@ -41,6 +41,11 @@ export default class Rover {
   // useful when we want to control when to land it
   init = () => this.setFacing(this.landingSpot[2]);
 
+  // We purposely wont have a method to enable it
+  disableRover = () => {
+    this.disabled = true;
+  };
+
   // Adds a direction to seen and set new facing direction
   setFacing = direction => {
     const { seen } = this;
@@ -59,6 +64,7 @@ export default class Rover {
 
   executeNextInstruction = () => {
     if (this.facing === null) throw new Error('Rover has not be landed yet');
+    if (this.disabled) return console.warn('Rover has been disabled, failed to execute instruction');
     if (this._isCompleted()) return console.warn('Tried to execute an empty instruction set');
 
     // NOTE - we can look to save it in an executed log but unneccesary for now
