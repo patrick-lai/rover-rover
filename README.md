@@ -30,7 +30,7 @@ npm run watch:test
 
 * The rovers are smart and can weave past each other on a square.. however exists a MAX number before they done fit square. (lets make this configurable)
 
-* If the instructions tell the rover to go off the plateau... its probably a good idea to just stop.. execution to save losing the expensive rover.
+* If the instructions tell the rover to go off the plateau... its probably a good idea to just stop execution to save losing the expensive rover. The rest of the fleet will continue.
 
 * The rover can see its initial (landing) position.
 
