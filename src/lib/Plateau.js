@@ -108,18 +108,6 @@ export default class Plateau {
       }
   };
 
-  getRoverState = rover => {
-    // Find the rover in our grid
-    // TODO - We should be using normal for-loop
-    for (const x in this.grid)
-      for (const y in this.grid[x])
-        if (this.grid[x][y].includes(rover))
-          return [parseInt(x, 10), parseInt(y, 10), rover.facing];
-
-    // Else cant find it
-    throw new Error('Cannot find rover');
-  };
-
   _moveForward = rover => {
     const state = this.getRoverState(rover);
     let target;
@@ -152,6 +140,18 @@ export default class Plateau {
   /*
    * Public Methods
    */
+
+  getRoverState = rover => {
+    // Find the rover in our grid
+    // TODO - We should be using normal for-loop
+    for (const x in this.grid)
+      for (const y in this.grid[x])
+        if (this.grid[x][y].includes(rover))
+          return [parseInt(x, 10), parseInt(y, 10), rover.facing];
+
+    // Else cant find it
+    throw new Error('Cannot find rover');
+  };
 
   deployRover = rover => {
     const { landingSpot } = rover;
