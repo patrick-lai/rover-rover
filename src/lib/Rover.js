@@ -40,14 +40,11 @@ export default class Rover {
   }
 
   /*
-   * Utilities
-   */
-
-  _isCompleted = () => !this.instructions || this.instructions.length === 0;
-
-  /*
    * Public methods
    */
+
+  isCompleted = () =>
+    this.disabled || !this.instructions || this.instructions.length === 0;
 
   // Initiates a rover and sets its initial facing position
   // useful when we want to control when to land it
@@ -83,7 +80,7 @@ export default class Rover {
     if (this.disabled)
       throw new Error('Rover has been disabled, failed to execute instruction');
     if (this.facing === null) throw new Error('Rover has not be landed yet');
-    if (this._isCompleted())
+    if (this.isCompleted())
       return console.warn('Tried to execute an empty instruction set');
 
     // NOTE - we can look to save it in an executed log but unneccesary for now

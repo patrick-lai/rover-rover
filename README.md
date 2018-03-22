@@ -4,6 +4,10 @@ Library simulating rovers roaming around a rectangular plateau
 
 ### Usage
 
+Step 1) Copy `.env.example` to `.env`. you can set `MAX_STACKING_ROVERS` here;
+
+Step 2) Execute command `npm start ./input.txt`; (defaults to `./input.txt`);
+
 ### Development
 
 We code in `Es6`, please release build with `npm run release`.
@@ -35,6 +39,8 @@ npm run watch:test
 * Rover must have a landing spot, If we have invalid instruction set we will not execute it at all. If it has a valid landing spot but invalid instructions.. we will land it but not execute anything.
 
 * Casing of instruction is sensitive
+
+* Expect input to have landing spot and instructions for each rover.
 
 ### Journal
 
@@ -69,3 +75,7 @@ Lets try to make it stateful so if we ever get to the front end we can maybe lev
 * 3rd Session ~ 2 hours
 
 total: 2.5 hours
+
+### TODO
+
+make `npm run release` build a compiled dist.

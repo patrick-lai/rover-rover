@@ -170,7 +170,7 @@ export default class Plateau {
     // Lets init it as per spec/assumptions
     rover.init();
 
-    // Add the rover into our sequence (To keep order!!!)
+    // Add the rover into our sequence to keep track of things
     this.rovers.push(rover);
   };
 

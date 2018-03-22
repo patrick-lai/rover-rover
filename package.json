@@ -4,12 +4,13 @@
   "description": "Mars landing",
   "main": "index.js",
   "scripts": {
+    "start": "babel-node src/index.js",
     "test": "jest --coverage",
-    "watch:test": "jest --watch"
+    "watch": "nodemon -x 'npm run start ./tests/sampleInput.txt'",
+    "watch:test": "jest --watch",
+    "release": "echo NOT IMPLEMENTED YET - build a compiled dist"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/patrick-lai/rover-rover.git"
@@ -21,10 +22,14 @@
   },
   "homepage": "https://github.com/patrick-lai/rover-rover#readme",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-core": "~6.26.0",
     "babel-jest": "~22.4.3",
     "babel-preset-env": "~1.6.1",
     "babel-preset-stage-2": "~6.24.1",
     "jest": "~22.4.2"
+  },
+  "dependencies": {
+    "dotenv": "^5.0.1"
   }
 }
