@@ -34,7 +34,7 @@ npm run watch:test
 
 * The rover can see its initial (landing) position.
 
-* Lets just reject landing any rovers areas that are initially off the plateau. But we will continue executing the rest of the fleet.
+* Lets just completely reject landing any rovers areas that are initially off the plateau and deem the input an error.
 
 * The rovers are landed in sequence before moving any of them and we are just not going to land the rover if theres already MAX rovers on that square.
 
