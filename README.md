@@ -15,7 +15,7 @@ Testing commands:
 npm run test
 
 // Live reload tests
-npm run test:watch
+npm run watch:test
 ```
 
 ### Assumptions
@@ -33,6 +33,8 @@ npm run test:watch
 * A rover can just land and do nothing
 
 * Rover must have a landing spot, If we have invalid instruction set we will not execute it at all. If it has a valid landing spot but invalid instructions.. we will land it but not execute anything.
+
+* Casing of instruction is sensitive
 
 ### Journal
 

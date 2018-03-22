@@ -2,6 +2,7 @@
  * Definitions of instructions and some helpers
  */
 
+// NOTE - The ordering of directions must be clockwise
 export const DIRECTIONS = ['N', 'E', 'S', 'W'];
 export const INSTRUCTIONS = ['L', 'R', 'M'];
 
