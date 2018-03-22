@@ -40,7 +40,14 @@ export const executeInput = data => {
 
   // Execute all rovers
   plateau.rovers.forEach(rover => {
-    while (!rover.isCompleted()) plateau.executeNextInstructionOfRover(rover);
+    while (!rover.isCompleted()) {
+      try {
+        plateau.executeNextInstructionOfRover(rover);
+      } catch (e) {
+        // On Error stop this rover and continue executing the fleet
+        rover.disable();
+      }
+    }
   });
 
   const roverStates = plateau.rovers.map(rover => plateau.getRoverState(rover));
