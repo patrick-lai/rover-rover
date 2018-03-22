@@ -4,9 +4,11 @@ Library simulating rovers roaming around a rectangular plateau
 
 ### Usage
 
-Step 1) Copy `.env.example` to `.env`. you can set `MAX_STACKING_ROVERS` here which limits the number of rovers that can be on one spot.
+step 1) `npm i`
 
-Step 2) Execute command `npm start ./input.txt`; (defaults to `./input.txt`);
+Step 2) Copy `.env.example` to `.env`. you can set `MAX_STACKING_ROVERS` here which limits the number of rovers that can be on one spot.
+
+Step 3) Execute command `npm start ./input.txt` (defaults to `./input.txt`)
 
 ** NOTE ** You can run `npm run sample` to execute the sample data.
 
