@@ -63,3 +63,8 @@ Lets try to make it stateful so if we ever get to the front end we can maybe lev
 5. You can't drive a rover off the plateau
 
 **step 4) Build...**
+
+* 1st Session ~ 1.5 hours
+* 2nd Session ~ 1 hour
+
+total: 2.5 hours
