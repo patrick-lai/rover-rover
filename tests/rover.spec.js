@@ -33,6 +33,12 @@ describe('Rover behaviour', () => {
     expect(west.hasSeen(['W'])).toBe(true);
   });
 
+  test('Cannot double init', () => {
+    const r1 = new Rover({ landingSpot: '1 1 N' });
+    r1.init();
+    expect(() => r1.init()).toThrow();
+  });
+
   test('Can Execute an instruction', () => {
     const r1 = new Rover({ landingSpot: '1 1 N', instructions: 'LLLLRRRRM' });
     r1.init();

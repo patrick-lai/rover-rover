@@ -39,7 +39,10 @@ export default class Rover {
 
   // Initiates a rover and sets its initial facing position
   // useful when we want to control when to land it
-  init = () => this.setFacing(this.landingSpot[2]);
+  init = () => {
+    if (this.facing !== null) throw new Error('This rover has already been init');
+    this.setFacing(this.landingSpot[2]);
+  };
 
   // We purposely wont have a method to enable it
   disableRover = () => {
