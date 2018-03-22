@@ -1,6 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Rover behaviour Can run large complex case 1`] = `
+"52 53 N
+30 42 W
+20 21 E
+19 9 W
+84 24 N
+27 22 S"
+`;
+
 exports[`Rover behaviour Can run test case 1`] = `
-"1,3,N
-5,1,E"
+"1 3 N
+5 1 E"
 `;

@@ -42,5 +42,5 @@ export const executeInput = data => {
   });
 
   const roverStates = plateau.rovers.map(rover => plateau.getRoverState(rover));
-  return roverStates.join('\n');
+  return roverStates.map(s => s.join(' ')).join('\n');
 };
