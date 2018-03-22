@@ -2,7 +2,7 @@
  * Rover unit tests
  */
 
-import Rover from '../src/Rover';
+import Rover from '../src/lib/Rover';
 
 describe('Rover behaviour', () => {
   test('Can instantiate a rover', () => {

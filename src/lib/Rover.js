@@ -80,11 +80,9 @@ export default class Rover {
   };
 
   executeNextInstruction = () => {
-    if (this.facing === null) throw new Error('Rover has not be landed yet');
     if (this.disabled)
-      return console.warn(
-        'Rover has been disabled, failed to execute instruction'
-      );
+      throw new Error('Rover has been disabled, failed to execute instruction');
+    if (this.facing === null) throw new Error('Rover has not be landed yet');
     if (this._isCompleted())
       return console.warn('Tried to execute an empty instruction set');
 

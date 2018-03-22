@@ -79,18 +79,21 @@ export default class Plateau {
 
   _getRovers = target => this.grid[target.x][target.y];
   _placeRover = (rover, target) => {
+    const { x, y } = target;
     // Check if the rover can fit on the square
     if (!this._isInBounds(target))
       throw new Error('Cannot place a rover out of bounds');
 
     const roversOnTarget = this._getRovers(target).length;
 
-    if (roversOnTarget >= this.maxStackingRovers)
+    if (roversOnTarget >= this.maxStackingRovers) {
+      rover.disable();
       throw new Error(
-        `Cannot place rover on ${x},${y}. Maximum rovers reached`
+        `Cannot place rover on ${x},${y}. Maximum rovers reached. Rover has been disabled`
       );
+    }
 
-    this.grid[target.x][target.y].push(rover);
+    this.grid[x][y].push(rover);
   };
 
   // NOTE - Allow it to jump
@@ -103,9 +106,10 @@ export default class Plateau {
       for (const y in this.grid[x]) {
         const index = this.grid[x][y].findIndex(r => r === rover);
         if (index > -1) {
+          // Place rover first so if it errors we stop here
+          this._placeRover(rover, target);
           // Splice out the rover and add it to the target
           const _rovers = this.grid[x][y].splice(index, 1);
-          this._placeRover(_rovers[0], target);
           return;
         }
       }

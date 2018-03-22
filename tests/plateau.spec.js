@@ -2,8 +2,8 @@
  * Rover unit tests
  */
 
-import Plateau from '../src/Plateau';
-import Rover from '../src/Rover';
+import Plateau from '../src/lib/Plateau';
+import Rover from '../src/lib/Rover';
 
 describe('Rover behaviour', () => {
   test('Can instantiate a plateau', () => {
@@ -131,5 +131,31 @@ describe('Rover behaviour', () => {
     expect(plateau.getRoverState(r1)).toEqual([0, 3, 'S']);
     plateau.executeNextInstructionOfRover(r1);
     expect(plateau.getRoverState(r1)).toEqual([0, 3, 'E']);
+  });
+
+  test('Cannot move a rover into a slot that doesnt have room', () => {
+    const plateau = new Plateau({ dimensions: '5 5', maxStackingRovers: 2 });
+    const r1 = new Rover({ landingSpot: '1 1 N', instructions: 'M' });
+    const r2 = new Rover({ landingSpot: '1 2 N' });
+    const r3 = new Rover({ landingSpot: '1 2 N' });
+
+    plateau.deployRover(r1);
+    plateau.deployRover(r2);
+    plateau.deployRover(r3);
+
+    expect(plateau.getRoverState(r1)).toEqual([1, 1, 'N']);
+    expect(() => plateau.executeNextInstructionOfRover(r1)).toThrow();
+    expect(plateau.getRoverState(r1)).toEqual([1, 1, 'N']);
+    expect(r1.disabled).toBe(true);
+  });
+
+  test('Cannot move disabled rover', () => {
+    const plateau = new Plateau({ dimensions: '5 5', maxStackingRovers: 2 });
+    const r1 = new Rover({ landingSpot: '1 1 N', instructions: 'M' });
+
+    plateau.deployRover(r1);
+    r1.disable();
+    expect(r1.disabled).toBe(true);
+    expect(() => plateau.executeNextInstructionOfRover(r1)).toThrow();
   });
 });

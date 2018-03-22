@@ -11,8 +11,10 @@ export const isValidLandingSpot = input => {
   if (typeof input !== 'string') return false;
   // Lets just ignore extra instructions
   const landingSpot = input.split(' ');
-  if (isNaN(parseInt(landingSpot[0], 10))) return false;
-  if (isNaN(parseInt(landingSpot[1], 10))) return false;
+  const x = parseInt(landingSpot[0], 10);
+  const y = parseInt(landingSpot[1], 10);
+  if (isNaN(x) || x < 0) return false;
+  if (isNaN(y) || y < 0) return false;
   if (!DIRECTIONS.includes(landingSpot[2])) return false;
   return true;
 };

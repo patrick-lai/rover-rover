@@ -7,7 +7,7 @@ import {
   isValidInstructions,
   DIRECTIONS,
   INSTRUCTIONS
-} from '../src/instructions';
+} from '../src/lib/instructions';
 
 describe('Instruction methods for rover', () => {
   test('isValidLandingSpot passes good input', () => {
@@ -17,6 +17,7 @@ describe('Instruction methods for rover', () => {
     expect(isValidLandingSpot('30 1000 W')).toBe(true);
     expect(isValidLandingSpot('1 2 N')).toBe(true);
     expect(isValidLandingSpot('3 3 E')).toBe(true);
+    expect(isValidLandingSpot('0 0 E')).toBe(true);
   });
 
   test('isValidLandingSpot failes bad input', () => {
@@ -27,6 +28,8 @@ describe('Instruction methods for rover', () => {
     expect(isValidLandingSpot('somethingrandom')).toBe(false);
     expect(isValidLandingSpot(undefined)).toBe(false);
     expect(isValidLandingSpot(null)).toBe(false);
+    expect(isValidLandingSpot('-1 0 S')).toBe(false);
+    expect(isValidLandingSpot('1 -1 S')).toBe(false);
   });
 
   test('isValidInstructions passes good input', () => {
