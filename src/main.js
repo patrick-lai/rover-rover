@@ -10,6 +10,8 @@ import { isValidLandingSpot, isValidInstructions } from './lib/instructions';
 const filename = process.argv[2];
 const { MAX_STACKING_ROVERS } = process.env;
 const maxStackingRovers = parseInt(MAX_STACKING_ROVERS, 10);
+
+// Checks
 if (isNaN(maxStackingRovers))
   throw new Error('Expected MAX_STACKING_ROVERS to be an Integer in env');
 

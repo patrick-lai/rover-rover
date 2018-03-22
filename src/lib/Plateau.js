@@ -14,10 +14,8 @@ const validateMaxStackingRovers = input => input > 0;
 const validateDimensions = input => {
   // Lets just ignore extra instructions
   const dimensions = input.split(' ');
-
   const width = parseInt(dimensions[0], 10);
   const height = parseInt(dimensions[1], 10);
-
   if (isNaN(width) || width < 1) return false;
   if (isNaN(height) || height < 1) return false;
   return true;
@@ -49,7 +47,6 @@ export default class Plateau {
 
     // Validation of dimensions is done inside this function
     const _size = parseDimensions(dimensions);
-
     this.maxStackingRovers = maxStackingRovers;
 
     // Init the grid
@@ -163,13 +160,10 @@ export default class Plateau {
   deployRover = rover => {
     const { landingSpot } = rover;
     if (rover.constructor !== Rover) throw new Error('Can only add type Rover');
-
     // Put the rover on the grid
     this._placeRover(rover, { x: landingSpot[0], y: landingSpot[1] });
-
     // Lets init it as per spec/assumptions
     rover.init();
-
     // Add the rover into our sequence to keep track of things
     this.rovers.push(rover);
   };
